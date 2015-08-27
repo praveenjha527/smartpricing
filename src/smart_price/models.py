@@ -16,7 +16,7 @@ class VariationRule(models.Model):
 
 class VariationFactor(models.Model):
     factor_value = models.FloatField()
-    factor_types = models.ForeignKey(VariationRule)
+    factor_types = models.ForeignKey(VariationRule, related_name='factors')
     rule_weight = models.IntegerField()
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
@@ -40,14 +40,13 @@ class Region(models.Model):
 
 class Product(models.Model):
     product_id = models.IntegerField()
-    brand = models.ForeignKey(Brand)
-    category = models.ForeignKey(Category)
+    brand = models.ForeignKey(Brand, related_name='products')
+    category = models.ForeignKey(Category, related_name='products')
     region = models.ForeignKey(Region)
     variation_factors = GenericRelation(VariationFactor, related_query_name='variation_factors')
 
     class Meta:
         unique_together = (('product_id', 'brand', 'category', 'region'),)
-
 
     @property
     def min_online_price(self):
