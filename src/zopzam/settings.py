@@ -42,6 +42,12 @@ INSTALLED_APPS = (
     'smart_price'
 )
 
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'SmartPricing Admin',
+    'CONFIRM_UNSAVED_CHANGES': True,
+    'MENU_EXCLUDE': ('auth.group', 'auth'),
+}
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
