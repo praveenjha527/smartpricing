@@ -2,7 +2,4 @@ Django==1.8.4
 djangorestframework==3.2.3
 requests==2.7.0
 django-suit==0.2.13
-django_rq==0.0.8
-
-
-
+django-rq==0.8.0

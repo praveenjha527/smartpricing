@@ -1,9 +1,9 @@
 __author__ = 'zopper'
+
 import tasks
-from tasks import dynamic_price_calculation
+import datetime
 import django_rq
 from collections import defaultdict
-import datetime
 
 scheduler = django_rq.get_scheduler('default')
 
@@ -28,6 +28,6 @@ def schedule_once(func, interval):
         scheduler.schedule(now+datetime.timedelta(seconds=interval), func,
                 interval=interval)
 
-
-
+rule_processor = tasks.RuleProcessor()
+schedule_once(rule_processor.process_all(), interval=60*30)
 

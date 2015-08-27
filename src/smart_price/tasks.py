@@ -11,10 +11,6 @@ from django.core.mail import send_mail
 from .models import Product
 from schedule import schedule_once
 
-def dynamic_price_calculation():
-    RuleProcessor().process_all()
-
-
 class RuleProcessor(object):
     queryset = VariationFactor.objects.all()
 

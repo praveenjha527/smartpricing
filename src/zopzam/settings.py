@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'smart_price',
      'django_rq',
     'genericadmin',
-    # 'django_rq',
+    'django_rq',
 )
 
 SUIT_CONFIG = {
