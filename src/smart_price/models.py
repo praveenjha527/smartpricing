@@ -1,7 +1,7 @@
 import requests
 from django.db import models
 
-STORES_HOST = "http://45.56.118.218"
+PRICES_HOST = "http://45.56.112.85"
 
 
 class Product(models.Model):
@@ -20,11 +20,22 @@ class Product(models.Model):
         pass
 
     @property
-    def sellerprices(self):
-        urn="api/v1/getproductpricestore/{product_id}/".format(product_id=self.product_id)
+    def seller_prices(self):
+        urn = "product/{product_id}/".format(product_id=self.product_id)
         params = {
-            "latitude":0,
-            "longitude":0,
-            "region_id":self.region_id
+            "Access-Token": 'pxfe15uguhtd54c82u9gdkd27mlbhwoi',
+            "Client-Key": 'cb5a4b9e5de0ee57647aed56f9295546',
+            "Region-Id": self.region_id,
+            "Latitude": 0,
+            "Longitude": 0,
+            "x-api-version": "1.3"
         }
-        response = requests.get("{0}/{1}".format(STORES_HOST, urn), params=params)
+        response = requests.get("{0}/{1}".format(PRICES_HOST, urn), params=params)
+        resp_json = response.json()
+        store_prices =[]
+        for store in resp_json.stores:
+            store_prices.append({
+                'store_id': store['id'],
+                'price':  store['price']
+            })
+        return store_prices
