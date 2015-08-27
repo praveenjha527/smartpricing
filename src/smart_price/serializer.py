@@ -21,7 +21,7 @@ class StoreSerializer(serializers.ModelSerializer):
         fields = ('store_id', 'region')
 
 class SuggestedPricesSerializer(serializers.ModelSerializer):
-    product = serializers.SlugRelatedField(slug_field='product_id', read_only=True)
+    product = ProductSerializer(read_only=True)
     store = StoreSerializer(read_only=True)
     class Meta:
         model = SuggestedPrices
