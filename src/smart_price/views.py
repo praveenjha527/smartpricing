@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from .models import Product, SuggestedPrices
 from .serializer import ProductSerializer, SuggestedPricesSerializer
-from .tasks import *
+from .schedule import *
 
 
 class ProductViewSet(viewsets.ModelViewSet):
