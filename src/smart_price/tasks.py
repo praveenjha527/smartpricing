@@ -11,7 +11,7 @@ from .models import Product
 from schedule import schedule_once
 
 
-#This will dynamically calculate the prices of products on the various parameters and offsets
+##This will dynamically calculate the prices of products on the various parameters and offsets
 
 
 
