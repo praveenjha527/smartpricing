@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from .tasks import *
 from .models import Product
 from .serializer import ProductSerializer
 

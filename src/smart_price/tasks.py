@@ -3,8 +3,8 @@ from django.contrib import contenttypes
 from .models import *
 
 import mimetypes
-# import django_rq
-# from django_rq import job
+import django_rq
+from django_rq import job
 from datetime import timedelta
 from django.conf import settings
 from django.core.mail import send_mail
@@ -79,3 +79,7 @@ class RuleProcessor(object):
 
     def __calculate_percentage__(self, val1, val2):
         return (val1/100) * val2
+
+########################ADD TASK TO SCHEDULER ##############################
+from schedule import schedule_once
+schedule_once(dynamic_price_calculation,interval=60*30)

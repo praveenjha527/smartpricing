@@ -1,6 +1,6 @@
 __author__ = 'zopper'
 import tasks
-from tasks import helloprint
+from tasks import dynamic_price_calculation
 import django_rq
 from collections import defaultdict
 import datetime
