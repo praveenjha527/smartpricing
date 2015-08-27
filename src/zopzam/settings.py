@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'smart_price',
+    'genericadmin',
     # 'django_rq',
 )
 
@@ -84,17 +85,11 @@ WSGI_APPLICATION = 'zopzam.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-
-
 DATABASES = {
-   'default': {
-   'ENGINE': 'django.db.backends.mysql',
-   'NAME':'smartpricing',
-   'USER': 'root',
-   'PASSWORD': 'pr.j370@g.c',
-   'HOST':'',
-   'PORT':'',
-    },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 

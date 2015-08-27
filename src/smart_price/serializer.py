@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product
+from .models import Product, Store, SuggestedPrices
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -12,3 +12,16 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
+
+
+class StoreSerializer(serializers.ModelSerializer):
+    region = serializers.SlugRelatedField(slug_field='region_id', read_only=True)
+    class Meta:
+        model = Store
+        fields = ('store_id', 'region')
+
+class SuggestedPricesSerializer(serializers.ModelSerializer):
+    product = serializers.SlugRelatedField(slug_field='product_id', read_only=True)
+    store = StoreSerializer(read_only=True)
+    class Meta:
+        model = SuggestedPrices

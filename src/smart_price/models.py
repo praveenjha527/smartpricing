@@ -18,7 +18,11 @@ class VariationFactor(models.Model):
     factor_value = models.FloatField()
     factor_types = models.ForeignKey(VariationRule, related_name='factors')
     rule_weight = models.IntegerField()
-    content_type = models.ForeignKey(ContentType)
+    limit = models.Q(app_label = 'smart_price', model = 'product')\
+            | models.Q(app_label = 'smart_price', model = 'brand')\
+            | models.Q(app_label = 'smart_price', model = 'region')\
+            | models.Q(app_label = 'smart_price', model = 'category')
+    content_type = models.ForeignKey(ContentType, limit_choices_to=limit)
     object_id = models.PositiveIntegerField()
     factor_target = GenericForeignKey('content_type', 'object_id')
 
@@ -95,6 +99,7 @@ class Product(models.Model):
 class Store(models.Model):
     store_id = models.IntegerField()
     region = models.ForeignKey(Region)
+
 
 class SuggestedPrices(models.Model):
     product = models.ForeignKey(Product)

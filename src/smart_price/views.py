@@ -1,7 +1,13 @@
 from rest_framework import viewsets
-from .models import Product
-from .serializer import ProductSerializer
+from .models import Product, SuggestedPrices
+from .serializer import ProductSerializer, SuggestedPricesSerializer
+
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+class SuggestedPricesViewSet(viewsets.ModelViewSet):
+    queryset = SuggestedPrices.objects.all()
+    serializer_class = SuggestedPricesSerializer
