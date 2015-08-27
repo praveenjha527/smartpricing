@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,12 @@ INSTALLED_APPS = (
     'smart_price',
     # 'django_rq',
 )
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'SmartPricing Admin',
+    'CONFIRM_UNSAVED_CHANGES': True,
+    'MENU_EXCLUDE': ('auth.group', 'auth'),
+}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,11 +84,17 @@ WSGI_APPLICATION = 'zopzam.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+   'default': {
+   'ENGINE': 'django.db.backends.mysql',
+   'NAME':'smartpricing',
+   'USER': 'root',
+   'PASSWORD': 'pr.j370@g.c',
+   'HOST':'',
+   'PORT':'',
+    },
 }
 
 
