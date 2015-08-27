@@ -1,6 +1,10 @@
+import requests
 from django.db import models
 
-class Price(models.Model):
+STORES_HOST = "http://45.56.118.218"
+
+
+class Product(models.Model):
     product_id = models.IntegerField()
     brand_id = models.IntegerField()
     category_id = models.IntegerField()
@@ -17,4 +21,10 @@ class Price(models.Model):
 
     @property
     def sellerprices(self):
-        pass
+        urn="api/v1/getproductpricestore/{product_id}/".format(product_id=self.product_id)
+        params = {
+            "latitude":0,
+            "longitude":0,
+            "region_id":self.region_id
+        }
+        response = requests.get("{0}/{1}".format(STORES_HOST, urn), params=params)
