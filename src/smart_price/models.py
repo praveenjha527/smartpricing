@@ -22,7 +22,7 @@ class Product(models.Model):
     @property
     def seller_prices(self):
         urn = "product/{product_id}/".format(product_id=self.product_id)
-        params = {
+        headers = {
             "Access-Token": 'pxfe15uguhtd54c82u9gdkd27mlbhwoi',
             "Client-Key": 'cb5a4b9e5de0ee57647aed56f9295546',
             "Region-Id": self.region_id,
@@ -30,12 +30,13 @@ class Product(models.Model):
             "Longitude": 0,
             "x-api-version": "1.3"
         }
-        response = requests.get("{0}/{1}".format(PRICES_HOST, urn), params=params)
+        response = requests.get("{0}/{1}".format(PRICES_HOST, urn), headers=headers)
         resp_json = response.json()
         store_prices =[]
-        for store in resp_json.stores:
+        for store in resp_json.get('stores'):
             store_prices.append({
                 'store_id': store['id'],
                 'price':  store['price']
             })
+
         return store_prices
