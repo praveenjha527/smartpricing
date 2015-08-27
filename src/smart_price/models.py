@@ -42,7 +42,7 @@ class Product(models.Model):
     product_id = models.IntegerField()
     brand = models.ForeignKey(Brand, related_name='products')
     category = models.ForeignKey(Category, related_name='products')
-    region = models.ForeignKey(Region)
+    region = models.ForeignKey(Region, related_name='products')
     variation_factors = GenericRelation(VariationFactor, related_query_name='variation_factors')
 
     class Meta:
@@ -92,5 +92,12 @@ class Product(models.Model):
         return store_prices or []
 
 
+class Store(models.Model):
+    store_id = models.IntegerField()
+    region = models.ForeignKey(Region)
 
-
+class SuggestedPrices(models.Model):
+    product = models.ForeignKey(Product)
+    store = models.ForeignKey(Store)
+    responsible_factor = models.ForeignKey(VariationFactor)
+    suggested_price = models.FloatField()
