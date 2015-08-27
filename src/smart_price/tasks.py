@@ -75,7 +75,3 @@ class RuleProcessor(object):
 
     def __calculate_percentage__(self, val1, val2):
         return (val1/100) * val2
-
-########################ADD TASK TO SCHEDULER ##############################
-from schedule import schedule_once
-schedule_once(dynamic_price_calculation,interval=60*30)
