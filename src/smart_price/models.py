@@ -9,6 +9,14 @@ CRAWLED_HOST = "http://128.199.238.212/"
 CRAWLED_URN = "product/minprice/{product_id}/"
 
 
+class DiscountRule(models.Model):
+    name = models.CharField(max_length=255)
+    value = models.IntegerField()
+    discount_op = models.CharField(max_length=1, choices=(
+        ('-', 'Flat')
+        ('%', 'Percentage')))
+
+
 class VariationRule(models.Model):
     rule_name = models.CharField(max_length=255)
     rule_operator = models.CharField(max_length=1)
@@ -25,6 +33,7 @@ class VariationFactor(models.Model):
     content_type = models.ForeignKey(ContentType, limit_choices_to=limit)
     object_id = models.PositiveIntegerField()
     factor_target = GenericForeignKey('content_type', 'object_id')
+    variation_discount = models.ForeignKey(DiscountRule)
 
 
 class Brand(models.Model):

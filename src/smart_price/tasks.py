@@ -33,16 +33,20 @@ class RuleProcessor(object):
         return return_query_set
 
     def process_all(self):
-        reduction_factor = 1
         # product_prices = {}
         for record in self.queryset:
+
+            reduction_rule = record.variation_discount
 
             factor_target = record.factor_target
             loop_query_set = self.get_factor_target_query_set(factor_target)
 
             for product in loop_query_set:
+                if reduction_rule.discount_op=='%':
+                    reduction_factor = self.get_operator(reduction_rule.discount_op)(reduction_rule.value, product.min_online_price)
+                else:
+                    reduction_factor = reduction_rule.value
                 seller_prices = product.seller_prices
-                # product_prices = self.prepare_prices(seller_prices)
                 min_price = min([price_dict['price'] for price_dict in seller_prices])
                 processed_variation = self.process_variation(record, min_price)
                 for price_dict in seller_prices:
