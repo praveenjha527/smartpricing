@@ -1,5 +1,5 @@
 from rest_framework import routers
-from .views import ProductViewSet, SuggestedPricesViewSet
+from views import ProductViewSet, SuggestedPricesViewSet
 
 smart_price_router = routers.DefaultRouter()
 

@@ -46,7 +46,7 @@ class RuleProcessor(object):
                             product=product, responsible_factor=record,
                             suggested_price=product.min_online_price - reduction_factor,
                             store=Store.objects.get_or_create(
-                                store_id=price_dict['store_id'], region=product.region)
+                                store_id=price_dict['store_id'], region=product.region)[0]
                         )
 
     def process_variation(self, variation_factor, price):

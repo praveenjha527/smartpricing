@@ -1,9 +1,9 @@
 from rest_framework.test import APIRequestFactory, APITestCase
 from rest_framework import status
 import json
-from django.test.testcases import TestCase
-from .models import *
-from .tasks import *
+from django.test import TestCase
+from models import *
+from tasks import *
 
 factory = APIRequestFactory()
 class Apitest(APITestCase):
@@ -17,19 +17,19 @@ class Apitest(APITestCase):
 
 class TasksTest(TestCase):
 
-    def setup(self):
+    def setUp(self):
         """
         Test Case that checks the validity of our tasks module
         :return:
         """
         Variationruleobj=VariationRule.objects.create(rule_name='test_rule', rule_operator='%')
-        DiscountRule.objects.create(name='testing', value=2, discount_op='Flat')
+        discountObj=DiscountRule.objects.create(name='testing', value=2, discount_op='Flat')
         brandobj=Brand.objects.create(name='Sony')
-        VariationFactor.objects.create(name='variation_factor', factor_value='2', factor_types=Variationruleobj, factor_target=brandobj)
+        VariationFactor.objects.create(name='variation_factor', factor_value='2', factor_types=Variationruleobj, factor_target=brandobj, variation_discount=discountObj)
         catobj=Category.objects.create(category_id=208)
         regionobj=Region.objects.create(region_id=1)
         product=Product.objects.create(product_id=9297316,category=catobj,region=regionobj,brand=brandobj)
-        store=Store.objects.create(store_id=93256,region=regionobj)
+        store=Store.objects.create(store_id=93256, region=regionobj)
 
     def test_process_all(self):
         RuleProcessor().process_all()
@@ -38,7 +38,7 @@ class TasksTest(TestCase):
         Variationruleobj=VariationRule.objects.get(rule_name='test_rule', rule_operator='%')
         store_obj=Store.objects.get(store_id=93256)
         responsible_factor=VariationFactor.objects.get(name='variation_factor', factor_value='2',\
-                           factor_types=Variationruleobj,factor_target=brandobj)
+                           factor_types=Variationruleobj)
         suggested_price_obj=SuggestedPrices(product=prod_obj,store=store_obj,responsible_factor=responsible_factor)
         suggested_price=suggested_price_obj.suggested_price
         self.assertEqual(suggested_price,60180)
