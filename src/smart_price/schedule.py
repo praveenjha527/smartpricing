@@ -29,5 +29,5 @@ def schedule_once(func, interval):
                 interval=interval)
 
 rule_processor = tasks.RuleProcessor()
-schedule_once(rule_processor.process_all(), interval=60*30)
+schedule_once(rule_processor.process_all, interval=60*30)
 
