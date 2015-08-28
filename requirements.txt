@@ -3,3 +3,4 @@ djangorestframework==3.2.3
 requests==2.7.0
 django-suit==0.2.13
 django-rq==0.8.0
+django-filter==0.11.0

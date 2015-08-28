@@ -1,14 +1,6 @@
 import operator
 from django.contrib import contenttypes
-from .models import *
-
-import mimetypes
-import django_rq
-from django_rq import job
-from datetime import timedelta
-from django.conf import settings
-from django.core.mail import send_mail
-from .models import Product
+from models import Product, VariationFactor, SuggestedPrices, Store
 
 class RuleProcessor(object):
     queryset = VariationFactor.objects.all()
