@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'smart_price',
-    'django_rq',
     'genericadmin',
     'django_rq',
 )
