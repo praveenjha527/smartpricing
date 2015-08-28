@@ -1,7 +1,7 @@
 __author__ = 'praveen'
 from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
-from models import Product, Category, VariationFactor, VariationRule, Region, Brand
+from models import Product, Category, VariationFactor, VariationRule, Region, Brand, DiscountRule
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -43,6 +43,10 @@ class RegionAdmin(admin.ModelAdmin):
     list_display = ('region_id',)
     search_fields = ('region_id',)
 
+class DiscountAdmin(admin.ModelAdmin):
+    list_display = ('name', 'value', 'discount_op')
+    list_filter = ('name', )
+    search_fields = ('name', 'value')
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
@@ -50,3 +54,4 @@ admin.site.register(VariationFactor, VariationFactorAdmin)
 admin.site.register(Region, RegionAdmin)
 admin.site.register(Brand, BrandAdmin)
 admin.site.register(VariationRule, VariationRuleAdmin)
+admin.site.register(DiscountRule, DiscountAdmin)
