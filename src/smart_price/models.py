@@ -16,13 +16,20 @@ class DiscountRule(models.Model):
         ('-', 'Flat')
         ('%', 'Percentage')))
 
+    def __unicode__(self):
+        return u'{0}'.format(self.name)
+
 
 class VariationRule(models.Model):
     rule_name = models.CharField(max_length=255)
     rule_operator = models.CharField(max_length=1)
 
+    def __unicode__(self):
+        return u'{0}'.format(self.rule_name)
+
 
 class VariationFactor(models.Model):
+    name = models.CharField(max_length=255)
     factor_value = models.FloatField()
     factor_types = models.ForeignKey(VariationRule, related_name='factors')
     rule_weight = models.IntegerField()
@@ -35,20 +42,32 @@ class VariationFactor(models.Model):
     factor_target = GenericForeignKey('content_type', 'object_id')
     variation_discount = models.ForeignKey(DiscountRule)
 
+    def __unicode__(self):
+        return u'{0}'.format(self.name)
+
 
 class Brand(models.Model):
     name = models.CharField(max_length=255)
     variation_factors = GenericRelation(VariationFactor, related_query_name='variation_factors')
+
+    def __unicode__(self):
+        return u'{0}'.format(self.name)
 
 
 class Category(models.Model):
     category_id = models.IntegerField()
     variation_factors = GenericRelation(VariationFactor, related_query_name='variation_factors')
 
+    def __unicode__(self):
+        return u'{0}'.format(self.category_id)
+
 
 class Region(models.Model):
     region_id = models.IntegerField()
     variation_factors = GenericRelation(VariationFactor, related_query_name='variation_factors')
+
+    def __unicode__(self):
+        return u'{0}'.format(self.region_id)
 
 
 class Product(models.Model):
@@ -57,6 +76,9 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products')
     region = models.ForeignKey(Region, related_name='products')
     variation_factors = GenericRelation(VariationFactor, related_query_name='variation_factors')
+
+    def __unicode__(self):
+        return u'{0}'.format(self.product_id)
 
     class Meta:
         unique_together = (('product_id', 'brand', 'category', 'region'),)
@@ -108,6 +130,9 @@ class Product(models.Model):
 class Store(models.Model):
     store_id = models.IntegerField()
     region = models.ForeignKey(Region)
+
+    def __unicode__(self):
+        return u'{0}'.format(self.store_id)
 
 
 class SuggestedPrices(models.Model):
