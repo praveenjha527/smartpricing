@@ -2,8 +2,7 @@ from rest_framework.test import APIRequestFactory, APITestCase
 from rest_framework import status
 import json
 from django.test.testcases import TestCase
-from django.db import models
-from src.smart_price.models import VariationRule, DiscountRule, VariationFactor
+from .models import *
 
 factory = APIRequestFactory()
 class Apitest(APITestCase):
