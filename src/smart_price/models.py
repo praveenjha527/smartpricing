@@ -13,7 +13,7 @@ class DiscountRule(models.Model):
     name = models.CharField(max_length=255)
     value = models.IntegerField()
     discount_op = models.CharField(max_length=1, choices=(
-        ('-', 'Flat')
+        ('-', 'Flat'),
         ('%', 'Percentage')))
 
     def __unicode__(self):
