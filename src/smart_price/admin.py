@@ -24,8 +24,8 @@ class VariationFactorAdmin(admin.ModelAdmin):
     inlines = [
         FactorInline,
     ]
-    list_display = ('factor_value', 'factor_types', 'rule_weight', 'factor_target',)
-    list_filter = ('factor_value', 'factor_types', 'rule_weight')
+    list_display = ('factor_value', 'factor_types', 'factor_target',)
+    list_filter = ('factor_value', 'factor_types',)
     search_fields = ('factor_value',)
 
 
