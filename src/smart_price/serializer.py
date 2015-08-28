@@ -26,7 +26,7 @@ class StoreSerializer(serializers.ModelSerializer):
 class SuggestedPricesSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
     store = StoreSerializer(read_only=True)
-    region = serializers.SerializerMethodField()
+    region_id = serializers.SerializerMethodField()
 
     class Meta:
         model = SuggestedPrices
