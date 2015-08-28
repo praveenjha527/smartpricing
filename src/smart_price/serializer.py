@@ -16,7 +16,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class StoreSerializer(serializers.ModelSerializer):
-    region = serializers.SlugRelatedField(slug_field='region_id', read_only=True)
+    # region = serializers.SlugRelatedField(slug_field='region_id', read_only=True)
 
     class Meta:
         model = Store
@@ -32,5 +32,5 @@ class SuggestedPricesSerializer(serializers.ModelSerializer):
         model = SuggestedPrices
         fields = ('product', 'store', 'region_id', 'suggested_price')
 
-    def get_region(self, obj):
+    def get_region_id(self, obj):
         return obj.product.region.region_id

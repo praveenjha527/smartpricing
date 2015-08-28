@@ -27,7 +27,6 @@ class VariationRule(models.Model):
     def __unicode__(self):
         return u'{0}'.format(self.rule_name)
 
-process_all_test
 class VariationFactor(models.Model):
     name = models.CharField(max_length=255)
     factor_value = models.FloatField()
