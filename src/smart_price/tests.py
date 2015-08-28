@@ -1,13 +1,11 @@
-from django.test import TestCase
+from rest_framework.test import APIRequestFactory, APITestCase
+import json
 
-# Create your tests here.
-
-
-class APItest(TestCase):
-    def api_test(self):
-        url='http://localhost:8000/suggested_prices/'
-        import  requests
-        filter_params={
-            ""
-        }
-        data=requests.get(url,filter_params)
+factory = APIRequestFactory()
+class Apitest(APITestCase):
+     def test_get_data(self):
+        """
+        Ensure we can get the right format.
+        """
+        response = self.client.get('//')
+        self.assertEqual(json.loads(response.content), {})

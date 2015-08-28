@@ -30,7 +30,7 @@ class SuggestedPricesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SuggestedPrices
-        fields = ('product', 'store', 'region', 'suggested_price')
+        fields = ('product', 'store', 'region_id', 'suggested_price')
 
     def get_region(self, obj):
         return obj.product.region.region_id
