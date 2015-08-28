@@ -32,7 +32,7 @@ class VariationFactor(models.Model):
     name = models.CharField(max_length=255)
     factor_value = models.FloatField()
     factor_types = models.ForeignKey(VariationRule, related_name='factors')
-    rule_weight = models.IntegerField()
+    rule_weight = models.IntegerField(null=True)
     limit = models.Q(app_label = 'smart_price', model = 'product')\
             | models.Q(app_label = 'smart_price', model = 'brand')\
             | models.Q(app_label = 'smart_price', model = 'region')\

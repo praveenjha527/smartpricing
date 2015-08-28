@@ -8,11 +8,11 @@ class ProductSerializer(serializers.ModelSerializer):
     max_online_price = serializers.FloatField(read_only=True)
     brand = serializers.SlugRelatedField(slug_field='name', read_only=True)
     category = serializers.SlugRelatedField(slug_field='category_id', read_only=True)
-    region = serializers.SlugRelatedField(slug_field='region_id', read_only=True)
+    # region = serializers.SlugRelatedField(slug_field='region_id', read_only=True)
 
     class Meta:
         model = Product
-        fields = ('product_id', 'seller_prices', 'min_online_price', 'min_online_price', 'brand', 'category')
+        fields = ('product_id', 'seller_prices', 'min_online_price', 'max_online_price', 'brand', 'category')
 
 
 class StoreSerializer(serializers.ModelSerializer):
